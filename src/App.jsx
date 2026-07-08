@@ -2,6 +2,10 @@ import { useMemo, useState } from "react";
 
 const programs = ["Elementary", "Middle School", "High School"];
 
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+const consultationUrl = "https://calendly.com/oliverguo6/academic-planning";
+const isGitHubPagesBuild = import.meta.env.BASE_URL === "/edubridge/";
+
 const benefits = [
   {
     title: "Top U.S. University Mentors",
@@ -90,6 +94,11 @@ function App() {
   };
 
   const openConsultation = () => {
+    if (isGitHubPagesBuild) {
+      window.location.assign(consultationUrl);
+      return;
+    }
+
     setSubmitState({ status: "idle", message: "" });
     setModalOpen(true);
     setMenuOpen(false);
@@ -104,7 +113,8 @@ function App() {
     setSubmitState({ status: "loading", message: "Sending your request..." });
 
     try {
-      const response = await fetch("/api/consultations", {
+      const apiBase = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+      const response = await fetch(`${apiBase}/api/consultations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -128,7 +138,7 @@ function App() {
       localStorage.setItem("edubridge-consultation-draft", JSON.stringify(fallback));
       setSubmitState({
         status: "error",
-        message: "The API is not running, so this draft was saved in your browser."
+        message: "This draft was saved in your browser. Please email edubridge622@gmail.com or book a consultation."
       });
     }
   };
@@ -219,10 +229,10 @@ function App() {
 
             <div className="hero-media" aria-label="EduBridge tutoring scenes">
               <figure className="hero-image hero-image-top">
-                <img src="/hero/mentor-math.png" alt="University mentor helping a student with math" />
+                <img src={assetPath("/hero/mentor-math.png")} alt="University mentor helping a student with math" />
               </figure>
               <figure className="hero-image hero-image-bottom">
-                <img src="/hero/mentor-writing.png" alt="University mentor guiding a student through writing" />
+                <img src={assetPath("/hero/mentor-writing.png")} alt="University mentor guiding a student through writing" />
               </figure>
             </div>
           </div>
@@ -300,7 +310,7 @@ function App() {
           <div className="mentor-grid page-grid">
             {mentors.map((mentor) => (
               <article className="mentor-card" key={mentor.label}>
-                <img src={mentor.image} alt={`${mentor.label} portrait`} />
+                <img src={assetPath(mentor.image)} alt={`${mentor.label} portrait`} />
                 <div className="mentor-content">
                   <div className="mentor-title-row">
                     <h3>{mentor.label}</h3>
