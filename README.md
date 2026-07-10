@@ -14,12 +14,12 @@ The source code stays on `main`. The static production build is published to the
 
 ## What is included
 
-- Polished landing page modeled after the reference Webflow site.
-- Generated high-resolution hero tutoring images, stored under `public/hero/`.
+- Commercial landing page with responsive navigation, full-bleed tutoring imagery, program tabs, mentor profiles, FAQ accordions, legal notices, and subtle motion.
+- Optimized WebP tutoring images, stored under `public/hero/`.
 - Supplied teacher photos, stored under `public/teachers/`.
-- Responsive sections for hero, mentorship value, process, mentor profiles, satisfaction guarantee, and footer.
-- A consultation modal wired to a backend API.
-- A dependency-free Node HTTP server for production static serving and `/api/consultations` submissions.
+- A consultation dialog with working Calendly, phone, email inquiry, and mentor application paths.
+- A dependency-free Node HTTP server for production static serving, `/api/health`, and `/api/consultations` submissions.
+- API validation, CORS restrictions, basic rate limiting, a spam honeypot, and secure static response headers.
 
 ## Scripts
 
@@ -46,4 +46,6 @@ data/consultations.jsonl
 
 In production, run `npm run build` and `npm run server`; the server serves `dist/` and handles API requests.
 
-GitHub Pages is static hosting, so it does not run `server/index.js`. For a public backend, deploy the Node server separately and set `VITE_API_BASE_URL` during the frontend build.
+GitHub Pages is static hosting, so it does not run `server/index.js`. On the public Pages build, the inquiry form opens a pre-addressed email and the scheduling path opens Calendly, so the full contact flow still works without collecting family data in the static site.
+
+For a hosted API, deploy the Node server separately, set `ALLOWED_ORIGINS`, and set `VITE_API_BASE_URL` during the frontend build. When `VITE_API_BASE_URL` is present, the same inquiry form submits directly to `/api/consultations`.
