@@ -831,13 +831,16 @@ function LegalModal({ onClose, type }) {
 
 function BridgeLogo() {
   return (
-    <img
-      className="brand-logo"
-      src={assetPath("/brand/edubridge-logo.webp")}
-      alt="Edubridge logo"
-      width="805"
-      height="570"
-    />
+    <span className="brand-lockup">
+      <img
+        className="brand-mark"
+        src={assetPath("/brand/edubridge-mark.webp")}
+        alt=""
+        width="805"
+        height="462"
+      />
+      <span className="brand-name">EduBridge</span>
+    </span>
   );
 }
 
