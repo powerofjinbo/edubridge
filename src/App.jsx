@@ -11,7 +11,6 @@ import {
   GraduationCap,
   HeartHandshake,
   Mail,
-  MapPin,
   Menu,
   MessageCircle,
   Minus,
@@ -20,7 +19,6 @@ import {
   Search,
   Send,
   ShieldCheck,
-  Sparkles,
   Target,
   TrendingUp,
   UserRoundCheck,
@@ -316,13 +314,6 @@ function App() {
   return (
     <>
       <header className="site-header">
-        <div className="announcement-bar">
-          <div className="announcement-inner">
-            <span><MapPin aria-hidden="true" /> Serving Orange County families with local and online options</span>
-            <a href={`tel:${phoneHref}`}><Phone aria-hidden="true" /> {phoneDisplay}</a>
-          </div>
-        </div>
-
         <nav className="nav-shell" aria-label="Main navigation">
           <a className="brand" href="#top" aria-label="EduBridge home">
             <BridgeLogo />
@@ -385,10 +376,6 @@ function App() {
                 <li><Check aria-hidden="true" /> Weekly 1-on-1 support</li>
                 <li><Check aria-hidden="true" /> Ongoing fit guidance</li>
               </ul>
-            </div>
-            <div className="hero-caption">
-              <span>LOCAL MENTOR NETWORK</span>
-              <p>UCLA, UCI, and other leading university students</p>
             </div>
           </div>
         </section>
@@ -545,7 +532,7 @@ function App() {
                 <article className="mentor-card" key={mentor.title} data-reveal style={{ "--delay": `${index * 100}ms` }}>
                   <div className="mentor-photo">
                     <img src={assetPath(mentor.image)} alt={`${mentor.title} portrait`} loading="lazy" />
-                    <span><Sparkles aria-hidden="true" /> Mentor profile</span>
+                    <span><ShieldCheck aria-hidden="true" /> Mentor profile</span>
                   </div>
                   <div className="mentor-content">
                     <p className="mentor-campus"><GraduationCap aria-hidden="true" /> {mentor.campus}</p>
@@ -844,20 +831,13 @@ function LegalModal({ onClose, type }) {
 
 function BridgeLogo() {
   return (
-    <span className="logo-lockup">
-      <BridgeMark />
-      <span><strong>Edu</strong>Bridge</span>
-    </span>
-  );
-}
-
-function BridgeMark() {
-  return (
-    <svg className="bridge-mark" viewBox="0 0 64 64" role="img" aria-label="EduBridge mark">
-      <path className="mark-cap" d="M32 4 58 14 32 24 6 14 32 4Z" />
-      <path d="M12 47h40M17 46c8-17 22-17 30 0M21 45V24m22 21V24M25 38c5-4 9-4 14 0" />
-      <path d="M52 16v13m0 0 4 6m-4-6-4 6" />
-    </svg>
+    <img
+      className="brand-logo"
+      src={assetPath("/brand/edubridge-logo.webp")}
+      alt="Edubridge logo"
+      width="805"
+      height="570"
+    />
   );
 }
 
